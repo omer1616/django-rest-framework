@@ -6,7 +6,7 @@ class ArticleSerializer(serializers.Serializer):
     author = serializers.CharField()
     title =  serializers.CharField()
     description = serializers.CharField()
-    text = serializers.TextField()
+    text = serializers.CharField()
     city= serializers.CharField()
     publication_date = serializers.DateField()
     status= serializers.BooleanField()
