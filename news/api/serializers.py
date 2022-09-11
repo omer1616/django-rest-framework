@@ -1,7 +1,41 @@
+from dataclasses import field
+from statistics import mode
 from rest_framework import serializers
 from news.models import Article
 
-class ArticleSerializer(serializers.Serializer):
+
+from datetime import datetime
+from datetime import date
+from django.utils.timesince import timesince
+
+### MODEL SERIALIZER
+class ArticleSerializer(serializers.ModelSerializer):
+    time_since_pub = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+
+    
+    def get_time_since_pub(self,object):
+        now = datetime.now()
+        pub_date = object.publication_date
+        if object.status == True:
+            time_delta = timesince(pub_date, now)
+            return time_delta
+        else:
+            return 'Aktif Degil!'
+
+    def validate_publication_date(self, date_value):
+        today = date.today()
+        if date_value > today:
+            raise serializers.ValidationError('Yayımlanma tarihi ileri bir tarih olamaz!')
+        return date_value
+
+
+#### STANDART SERIALIZER
+class ArticleDefoultSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     author = serializers.CharField()
     title =  serializers.CharField()
