@@ -27,3 +27,15 @@ class ArticleSerializer(serializers.Serializer):
         instance.publication_date = validated_data.get('publication_date' , instance.publication_date)
         instance.status = validated_data.get( 'status' , instance.status) 
         instance.save()    
+
+
+    def validate(self, data):
+        print(data)
+        if data['title'] == data['description']: 
+            raise serializers.ValidationError('baslık ve açıklama aynı olamaz')
+        return data    
+
+
+    def validate_title(self, value):
+        if len(value) >20:
+            raise  serializers.ValidationError('BASLIK ALANI 20 KARATERİ GECEMEZ')   
