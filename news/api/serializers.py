@@ -1,7 +1,7 @@
-from dataclasses import field
+from dataclasses import field, fields
 from statistics import mode
 from rest_framework import serializers
-from news.models import Article
+from news.models import Article,  Journalist
 
 
 from datetime import datetime
@@ -32,6 +32,32 @@ class ArticleSerializer(serializers.ModelSerializer):
         if date_value > today:
             raise serializers.ValidationError('Yayımlanma tarihi ileri bir tarih olamaz!')
         return date_value
+
+
+
+
+
+
+
+
+
+class JournalistSerializer(serializers.ModelSerializer):
+    
+    articles =   serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='articles-detail',
+    )
+
+    class Meta:
+        model =  Journalist
+        fields = '__all__'
+
+
+
+
+
+
 
 
 #### STANDART SERIALIZER
