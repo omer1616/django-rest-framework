@@ -1,4 +1,4 @@
-import imp
+
 from django.contrib import admin
 from  news.models import  Article, Journalist
 # Register your models here.
