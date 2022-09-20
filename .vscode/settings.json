@@ -1,6 +1,9 @@
 {
-    
+   "python.pythonPath": "/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/bin/python3.10",
     "python.autoComplete.extraPaths": [
         "/Django/djangoRestFramework/restFramework/venv/Lib/site-packages",
+      ],
+      "python.analysis.extraPaths": [
+        "/Django/djangoRestFramework/restFramework/venv/Lib/site-packages"
       ]
 }
