@@ -1,9 +1,11 @@
 from ast import arg
+from time import perf_counter
 from rest_framework.generics import GenericAPIView
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from books.models import Book, Comment
+from books.api.permissions import IsAdminUserOrReadOnly
 
 from books.api.serializers import BookSerializer,  CommentSerializer
 
@@ -11,7 +13,7 @@ from books.api.serializers import BookSerializer,  CommentSerializer
 class BooksCreateApiView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-
+    permission_classes = [IsAdminUserOrReadOnly]
 
 class BookDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset =  Book.objects.all()

@@ -3,7 +3,5 @@
     "python.autoComplete.extraPaths": [
         "/Django/djangoRestFramework/restFramework/venv/Lib/site-packages",
       ],
-      "python.analysis.extraPaths": [
-        "/Django/djangoRestFramework/restFramework/venv/Lib/site-packages"
-      ]
+    
 }
