@@ -27,7 +27,8 @@ class CommentCreateApiView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         book_pk = self.kwargs.get('book_pk')
         book =  get_object_or_404(Book, pk=book_pk)
-        serializer.save(book=book) 
+        commenter =  self.request.user
+        serializer.save(book=book, commenter=commenter) 
 
 class CommentDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset =  Comment.objects.all()
